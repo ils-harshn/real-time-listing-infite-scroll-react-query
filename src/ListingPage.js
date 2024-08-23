@@ -5,12 +5,15 @@ import InfiniteScroll from "react-infinite-scroller";
 import axios from "axios";
 import useTempStore, { useCacheAdd } from "./tempStore";
 
-const socket = io("http://localhost:5000"); // Backend server URL
+const socket = io(process.env.REACT_APP_API_URI); // Backend server URL
 
 const fetchUsers = async ({ pageParam = undefined }) => {
-  const { data } = await axios.get("http://localhost:5000/api/users2", {
-    params: { index: pageParam },
-  });
+  const { data } = await axios.get(
+    `${process.env.REACT_APP_API_URI}/api/users2`,
+    {
+      params: { index: pageParam },
+    }
+  );
   return data;
 };
 
