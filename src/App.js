@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "react-query";
+import ListingPage from "./ListingPage";
+import DataEntryPage from "./DataEntryPage";
 
-function App() {
+// Create a QueryClient instance
+const queryClient = new QueryClient();
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    // Wrap your app with QueryClientProvider
+    <QueryClientProvider client={queryClient}>
+      <Router>
+        <Routes>
+          <Route path="/" element={<ListingPage />} />
+          <Route path="/data-entry" element={<DataEntryPage />} />
+        </Routes>
+      </Router>
+    </QueryClientProvider>
   );
-}
+};
 
 export default App;
